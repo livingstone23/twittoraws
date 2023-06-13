@@ -10,6 +10,7 @@ import (
 	lambda "github.com/aws/aws-lambda-go/lambda"
 	"github.com/livingstone23/twittoraws/awsgo"
 	"github.com/livingstone23/twittoraws/bd"
+	"github.com/livingstone23/twittoraws/handlers"
 	"github.com/livingstone23/twittoraws/models"
 	"github.com/livingstone23/twittoraws/secretmanager"
 )
@@ -75,6 +76,19 @@ func EjecutoLambda(ctx context.Context, request events.APIGatewayProxyRequest) (
 		return res, nil
 	}
 
+	respAPI := handlers.Manejadores(awsgo.Ctx, request)
+	if respAPI.CustomResp == nil {
+		res = &events.APIGatewayProxyResponse{
+			StatusCode: respAPI.Status, //Error por falta de paramtro
+			Body:       respAPI.Message,
+			Headers: map[string]string{
+				"Content-Type": "appication/json",
+			},
+		}
+		return res, nil
+	} else {
+		return respAPI.CustomResp, nil
+	}
 }
 
 func ValidoParametros() bool {
