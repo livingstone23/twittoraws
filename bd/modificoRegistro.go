@@ -45,10 +45,12 @@ func ModificoRegistro(u models.Usuario, ID string) (bool, error) {
 		registro["biografia"] = u.Biografia
 	}
 
+	fmt.Println("Modificando ubicacion por: " + u.Ubicacion)
 	if len(u.Ubicacion) > 0 {
 		registro["ubicacion"] = u.Ubicacion
 	}
 
+	fmt.Println("Modificando sitioweb por: " + u.SitioWeb)
 	if len(u.SitioWeb) > 0 {
 		registro["sitioWeb"] = u.SitioWeb
 	}
@@ -57,8 +59,8 @@ func ModificoRegistro(u models.Usuario, ID string) (bool, error) {
 		"$set": registro,
 	}
 
-	objId, _ := primitive.ObjectIDFromHex(ID)
-	filtro := bson.M{"_id": bson.M{"$eq": objId}}
+	objID, _ := primitive.ObjectIDFromHex(ID)
+	filtro := bson.M{"_id": bson.M{"$eq": objID}}
 
 	_, err := col.UpdateOne(ctx, filtro, updtString)
 
