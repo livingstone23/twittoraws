@@ -14,7 +14,6 @@ import (
 
 /*Login permite confirmar si el usuario esta acreditado*/
 func Login(ctx context.Context) models.RespApi {
-	w.Header().Add("content-type", "application/json")
 
 	var t models.Usuario
 	var r models.RespApi
