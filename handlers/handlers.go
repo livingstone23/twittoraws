@@ -23,6 +23,7 @@ func Manejadores(ctx context.Context, request events.APIGatewayProxyRequest) mod
 		return r
 	}
 
+	//Permite organizar nuestras rutas.
 	switch ctx.Value(models.Key("method")).(string) {
 	case "POST":
 		switch ctx.Value(models.Key("path")).(string) {

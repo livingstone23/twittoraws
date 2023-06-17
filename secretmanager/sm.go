@@ -24,6 +24,7 @@ func GetSecret(secretName string) (models.Secret, error) {
 		return datosSecret, err
 	}
 
+	//Convierte los valores en una estructura
 	json.Unmarshal([]byte(*clave.SecretString), &datosSecret)
 	fmt.Println(" > Lectura de Secret OK" + secretName)
 	return datosSecret, nil

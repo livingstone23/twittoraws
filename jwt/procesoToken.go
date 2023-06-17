@@ -22,6 +22,7 @@ func ProcesoToken(tk string, JWTSign string) (*models.Claim, bool, string, error
 
 	tk = strings.TrimSpace(splitToken[1])
 
+	//Seccion que decodifica el token
 	tkn, err := jwt.ParseWithClaims(tk, &claims, func(token *jwt.Token) (interface{}, error) {
 		return miclave, nil
 	})
