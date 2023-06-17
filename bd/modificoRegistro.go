@@ -21,10 +21,12 @@ func ModificoRegistro(u models.Usuario, ID string) (bool, error) {
 
 	registro := make(map[string]interface{})
 
+	fmt.Println("Modificando nombre por: " + u.Nombre)
 	if len(u.Nombre) > 0 {
 		registro["nombre"] = u.Nombre
 	}
 
+	fmt.Println("Modificando apellido por: " + u.Apellido)
 	if len(u.Apellido) > 0 {
 		registro["apellidos"] = u.Apellido
 	}
