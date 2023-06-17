@@ -61,7 +61,7 @@ func Login(ctx context.Context) models.RespApi {
 	cookie := &http.Cookie{
 		Name:    "token",
 		Value:   jwtKey,
-		Expires: time.Now().Add(24 * time.Hour),
+		Expires: time.Now().Add(720 * time.Hour),
 	}
 
 	cookieString := cookie.String()
