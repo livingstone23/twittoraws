@@ -2,9 +2,11 @@ package jwt
 
 import (
 	"errors"
+	"fmt"
 	"strings"
 
 	jwt "github.com/golang-jwt/jwt/v5"
+	"github.com/livingstone23/twittoraws/bd"
 	"github.com/livingstone23/twittoraws/models"
 )
 
@@ -12,6 +14,7 @@ var Email string
 var IDUsuario string
 
 func ProcesoToken(tk string, JWTSign string) (*models.Claim, bool, string, error) {
+	fmt.Println("Funcion ProcesoToken ")
 	miclave := []byte(JWTSign)
 	var claims models.Claim
 
@@ -29,6 +32,12 @@ func ProcesoToken(tk string, JWTSign string) (*models.Claim, bool, string, error
 
 	if err == nil {
 		//rutina que chequea contra la BD
+		_, encontrado, _ := bd.ChequeoYaExisteUsuario(claims.Email)
+		if encontrado {
+			Email = claims.Email
+			IDUsuario = claims.ID.Hex()
+		}
+		return &claims, encontrado, IDUsuario, nil
 	}
 
 	if !tkn.Valid {

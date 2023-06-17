@@ -73,9 +73,11 @@ func validoAuthorization(ctx context.Context, request events.APIGatewayProxyRequ
 	claim, todoOk, msg, err := jwt.ProcesoToken(token, ctx.Value(models.Key("jwtSign")).(string))
 	if !todoOk {
 		if err != nil {
+			fmt.Println("lcano 1")
 			fmt.Println("Error en el token" + err.Error())
 			return false, 401, err.Error(), models.Claim{}
 		} else {
+			fmt.Println("lcano 2")
 			fmt.Println("Error en el token" + msg)
 			return false, 401, msg, models.Claim{}
 		}
