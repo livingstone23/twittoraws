@@ -2,6 +2,7 @@ package bd
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/livingstone23/twittoraws/models"
 	"go.mongodb.org/mongo-driver/bson"
@@ -9,7 +10,7 @@ import (
 
 /*ChequeoYaExisteUsuario: Funcion que recibe un email y chequea si el usuario ya existe*/
 func ChequeoYaExisteUsuario(email string) (models.Usuario, bool, string) {
-
+	fmt.Println("Funcion ChequeoYaExisteUsuario ")
 	ctx := context.TODO()
 	db := MongoCN.Database(DatabaseName)
 	col := db.Collection("usuarios")

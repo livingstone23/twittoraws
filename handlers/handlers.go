@@ -58,9 +58,10 @@ func Manejadores(ctx context.Context, request events.APIGatewayProxyRequest) mod
 }
 
 func validoAuthorization(ctx context.Context, request events.APIGatewayProxyRequest) (bool, int, string, models.Claim) {
+	fmt.Println("funcion  validoAuthorization")
 	path := ctx.Value(models.Key("path")).(string)
 
-	if path == "registro" || path == "login" || path == "obtenerAvatar" || path == "obtenerBanner" {
+	if path == "registro" || path == "login" || path == "obteneravatar" || path == "obtenerbanner" {
 		return true, 200, "", models.Claim{}
 	}
 
