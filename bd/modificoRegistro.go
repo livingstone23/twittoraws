@@ -3,7 +3,6 @@ package bd
 import (
 	"context"
 	"fmt"
-	"time"
 
 	"github.com/livingstone23/twittoraws/models"
 	"go.mongodb.org/mongo-driver/bson"
@@ -13,9 +12,8 @@ import (
 /*Modifico registro permite modificar el perfil del usuario*/
 func ModificoRegistro(u models.Usuario, ID string) (bool, error) {
 	fmt.Println("Ingresando ModificoRegistro")
-	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
-	defer cancel()
 
+	ctx := context.TODO()
 	db := MongoCN.Database("twittordb")
 	col := db.Collection("usuarios")
 
@@ -45,12 +43,12 @@ func ModificoRegistro(u models.Usuario, ID string) (bool, error) {
 		registro["biografia"] = u.Biografia
 	}
 
-	fmt.Println("Modificando apellido por: " + u.Apellido)
+	fmt.Println("Modificando ubicacion por: " + u.Ubicacion)
 	if len(u.Ubicacion) > 0 {
 		registro["ubicacion"] = u.Ubicacion
 	}
 
-	fmt.Println("Modificando apellido por: " + u.Apellido)
+	fmt.Println("Modificando sitioweb por: " + u.SitioWeb)
 	if len(u.SitioWeb) > 0 {
 		registro["sitioWeb"] = u.SitioWeb
 	}
