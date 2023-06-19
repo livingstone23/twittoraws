@@ -40,7 +40,7 @@ func UploadImage(ctx context.Context, uploadType string, request events.APIGatew
 
 	nombrebucket := ctx.Value(models.Key("bucketName")).(string)
 	fmt.Println("funcion_UploadImage antes Bucket name: " + nombrebucket)
-	bucket := aws.String(ctx.Value(models.Key("bucketName")).(string))
+	bucket := aws.String(ctx.Value(models.Key("BucketName")).(string))
 
 	fmt.Println("funcion_UploadImage Bucket name: ")
 
