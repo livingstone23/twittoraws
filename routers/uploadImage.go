@@ -73,7 +73,7 @@ func UploadImage(ctx context.Context, uploadType string, request events.APIGatew
 		body, err := base64.StdEncoding.DecodeString(request.Body)
 		if err != nil {
 			r.Status = 500
-			r.Message = "funcion_UploadImage ingreso if del multipart 1"
+			r.Message = "funcion_UploadImage ingreso if del multipart 1" + err.Error()
 			return r
 		}
 
@@ -125,7 +125,7 @@ func UploadImage(ctx context.Context, uploadType string, request events.APIGatew
 		status, err := bd.ModificoRegistro(usuario, IDUsuario)
 		if err != nil || !status {
 			r.Status = 400
-			r.Message = "funcion_UploadImage ingreso if del multipart 5" + err.Error()
+			r.Message = "funcion_UploadImage ingreso if del multipart 6" + err.Error()
 			return r
 		}
 
