@@ -39,6 +39,8 @@ func UploadImage(ctx context.Context, uploadType string, request events.APIGatew
 	var usuario models.Usuario
 	bucket := aws.String(ctx.Value(models.Key("bucketName")).(string))
 
+	fmt.Println("funcion_UploadImage Bucket name: " + models.Key("bucketName"))
+
 	switch uploadType {
 	case "A":
 		filename = "avatars/" + IDUsuario + ".jpg"
@@ -47,6 +49,8 @@ func UploadImage(ctx context.Context, uploadType string, request events.APIGatew
 		filename = "banners/" + IDUsuario + ".jpg"
 		usuario.Avatar = filename
 	}
+
+	fmt.Println("funcion_UploadImage Pasando el nombre archivo imagen : " + filename)
 
 	mediaType, params, err := mime.ParseMediaType(request.Headers["Content-Type"])
 	if err != nil {
@@ -62,6 +66,8 @@ func UploadImage(ctx context.Context, uploadType string, request events.APIGatew
 			return r
 		}
 
+		fmt.Println("funcion_UploadImage Pasando 'multipart'")
+
 		mr := multipart.NewReader(bytes.NewReader(body), params["boundary"])
 		p, err := mr.NextPart()
 		if err != nil && err != io.EOF {
@@ -69,6 +75,8 @@ func UploadImage(ctx context.Context, uploadType string, request events.APIGatew
 			r.Message = err.Error()
 			return r
 		}
+
+		fmt.Println("funcion_UploadImage Pasando 'boundary'")
 
 		if err != io.EOF {
 			if p.FileName() != "" {
@@ -85,6 +93,8 @@ func UploadImage(ctx context.Context, uploadType string, request events.APIGatew
 					r.Message = err.Error()
 					return r
 				}
+
+				fmt.Println("funcion_UploadImage Pasando 'us-east-1'")
 
 				uploader := s3manager.NewUploader(sess)
 				_, err = uploader.Upload(&s3manager.UploadInput{
@@ -107,6 +117,8 @@ func UploadImage(ctx context.Context, uploadType string, request events.APIGatew
 			r.Message = err.Error()
 			return r
 		}
+
+		fmt.Println("funcion_UploadImage Pasando 'ModificoRegistro'")
 
 	} else {
 		r.Message = "Debe enviar una imagen con el 'Content-Type' de tipo 'multipart/' en el Header"
