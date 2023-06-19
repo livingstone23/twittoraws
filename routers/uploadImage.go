@@ -60,9 +60,11 @@ func UploadImage(ctx context.Context, uploadType string, request events.APIGatew
 	mediaType, params, err := mime.ParseMediaType(request.Headers["Content-Type"])
 	if err != nil {
 		r.Status = 500
-		r.Message = err.Error()
+		r.Message = "Error Contentent Type " + err.Error()
 		return r
 	}
+
+	fmt.Println("funcion_UploadImage Pasando el Content-Type : " + filename)
 
 	if strings.HasPrefix(mediaType, "multipart/") {
 		body, err := base64.StdEncoding.DecodeString(request.Body)
