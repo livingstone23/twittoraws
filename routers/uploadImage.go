@@ -67,9 +67,13 @@ func UploadImage(ctx context.Context, uploadType string, request events.APIGatew
 	fmt.Println("funcion_UploadImage Pasando el Content-Type : " + filename)
 
 	if strings.HasPrefix(mediaType, "multipart/") {
+
+		fmt.Println("funcion_UploadImage ingreso if del multipart")
+
 		body, err := base64.StdEncoding.DecodeString(request.Body)
 		if err != nil {
 			r.Status = 500
+			r.Message = "funcion_UploadImage ingreso if del multipart 1"
 			return r
 		}
 
@@ -79,7 +83,7 @@ func UploadImage(ctx context.Context, uploadType string, request events.APIGatew
 		p, err := mr.NextPart()
 		if err != nil && err != io.EOF {
 			r.Status = 500
-			r.Message = err.Error()
+			r.Message = "funcion_UploadImage ingreso if del multipart 2" + err.Error()
 			return r
 		}
 
@@ -90,14 +94,14 @@ func UploadImage(ctx context.Context, uploadType string, request events.APIGatew
 				buf := bytes.NewBuffer(nil)
 				if _, err := io.Copy(buf, p); err != nil {
 					r.Status = 500
-					r.Message = err.Error()
+					r.Message = "funcion_UploadImage ingreso if del multipart 3" + err.Error()
 					return r
 				}
 
 				sess, err := session.NewSession(&aws.Config{Region: aws.String("us-east-1")})
 				if err != nil {
 					r.Status = 500
-					r.Message = err.Error()
+					r.Message = "funcion_UploadImage ingreso if del multipart 4" + err.Error()
 					return r
 				}
 
@@ -112,7 +116,7 @@ func UploadImage(ctx context.Context, uploadType string, request events.APIGatew
 
 				if err != nil {
 					r.Status = 500
-					r.Message = err.Error()
+					r.Message = "funcion_UploadImage ingreso if del multipart 5" + err.Error()
 					return r
 				}
 			}
@@ -121,7 +125,7 @@ func UploadImage(ctx context.Context, uploadType string, request events.APIGatew
 		status, err := bd.ModificoRegistro(usuario, IDUsuario)
 		if err != nil || !status {
 			r.Status = 400
-			r.Message = err.Error()
+			r.Message = "funcion_UploadImage ingreso if del multipart 5" + err.Error()
 			return r
 		}
 
