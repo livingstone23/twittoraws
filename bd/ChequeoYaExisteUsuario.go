@@ -11,6 +11,7 @@ import (
 /*ChequeoYaExisteUsuario: Funcion que recibe un email y chequea si el usuario ya existe*/
 func ChequeoYaExisteUsuario(email string) (models.Usuario, bool, string) {
 	fmt.Println("Funcion ChequeoYaExisteUsuario ")
+	fmt.Println("Usuaruio a revisar: " + email)
 	ctx := context.TODO()
 	db := MongoCN.Database(DatabaseName)
 	col := db.Collection("usuarios")
