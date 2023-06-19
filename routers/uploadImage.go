@@ -39,7 +39,7 @@ func UploadImage(ctx context.Context, uploadType string, request events.APIGatew
 	var usuario models.Usuario
 	bucket := aws.String(ctx.Value(models.Key("bucketName")).(string))
 
-	fmt.Println("funcion_UploadImage Bucket name: " + models.Key("bucketName"))
+	fmt.Println("funcion_UploadImage Bucket name: ")
 
 	switch uploadType {
 	case "A":
