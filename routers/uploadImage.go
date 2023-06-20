@@ -39,9 +39,7 @@ func UploadImage(ctx context.Context, uploadType string, request events.APIGatew
 	var usuario models.Usuario
 
 	fmt.Println("funcion_UploadImage antes Bucket name1 :")
-	//nombreBucket1 := "twitter-golang"
-	//nombrebucket := ctx.Value(models.Key("bucketname")).(string)
-	//fmt.Println("funcion_UploadImage antes Bucket name: " + nombreBucket1)
+
 	bucket := aws.String(ctx.Value(models.Key("bucketname")).(string))
 
 	fmt.Println("funcion_UploadImage Bucket name: ")
@@ -70,11 +68,10 @@ func UploadImage(ctx context.Context, uploadType string, request events.APIGatew
 
 		fmt.Println("funcion_UploadImage ingreso if del multipart")
 
-		body, err := base64.StdEncoding.EncodeToString([]byte("123456"))
-		data3 := base64.StdEncoding.EncodeToString([]byte("123456789"))
+		body, err := base64.StdEncoding.DecodeString(request.Body)
 		if err != nil {
 			r.Status = 500
-			r.Message = "  funcion_UploadImage ingreso if del multipart 1" + err.Error()
+			r.Message = "funcion_UploadImage ingreso if del multipart 1" + err.Error() + "Hasta aqui error" + request.Body
 			return r
 		}
 
