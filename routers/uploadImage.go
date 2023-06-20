@@ -70,10 +70,10 @@ func UploadImage(ctx context.Context, uploadType string, request events.APIGatew
 
 		fmt.Println("funcion_UploadImage ingreso if del multipart")
 
-		body, err := base64.StdEncoding.Strict().DecodeString(request.Body)
+		body, err := base64.StdEncoding.DecodeString(request.Body)
 		if err != nil {
 			r.Status = 500
-			r.Message = request.Body + "  funcion_UploadImage ingreso if del multipart 1" + err.Error()
+			r.Message = "  funcion_UploadImage ingreso if del multipart 1" + err.Error()
 			return r
 		}
 
