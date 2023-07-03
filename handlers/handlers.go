@@ -47,6 +47,10 @@ func Manejadores(ctx context.Context, request events.APIGatewayProxyRequest) mod
 			return routers.VerPerfil(request)
 		case "leotweets":
 			return routers.LeoTweets(request)
+		case "obtenerAvatar":
+			return routers.ObtenerImagen(ctx, "A", request, claim)
+		case "obtenerBanner":
+			return routers.ObtenerImagen(ctx, "A", request, claim)
 		}
 		//
 	case "PUT":

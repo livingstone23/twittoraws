@@ -50,7 +50,7 @@ func UploadImage(ctx context.Context, uploadType string, request events.APIGatew
 		usuario.Avatar = filename
 	case "B":
 		filename = "banners/" + IDUsuario + ".jpg"
-		usuario.Avatar = filename
+		usuario.Banner = filename
 	}
 
 	fmt.Println("funcion_UploadImage Pasando el nombre archivo imagen : " + filename)
