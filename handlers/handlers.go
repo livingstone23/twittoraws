@@ -66,6 +66,8 @@ func Manejadores(ctx context.Context, request events.APIGatewayProxyRequest) mod
 		switch ctx.Value(models.Key("path")).(string) {
 		case "eliminartweet":
 			return routers.EliminarTweet(request, claim)
+		case "bajaRelacion":
+			return routers.BajaRelacion(request, claim)
 		}
 		//
 	}

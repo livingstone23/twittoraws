@@ -8,7 +8,7 @@ import (
 )
 
 func InsertoRelacion(t models.Relacion) (bool, error) {
-	fmt.Println("Ingresando en funcion InsertoRelacion")
+	fmt.Println("Ingresando en funcion bd.InsertoRelacion")
 
 	ctx := context.TODO()
 	db := MongoCN.Database(DatabaseName)
